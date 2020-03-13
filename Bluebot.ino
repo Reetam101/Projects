@@ -1,11 +1,11 @@
-
+/* Arduino based Bluetooth controlled car. 
+Bluetooth module = HC05, L293D motor driver, Arduino UNO */
 int IN1 = 8;
 int IN2 = 12;
 int IN3 = 7;
 int IN4 = 4;
 char btVal;
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(IN1, OUTPUT); 
   pinMode(IN2, OUTPUT);
@@ -14,7 +14,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   while(Serial.available()>0)
   {
     btVal = Serial.read();
@@ -38,34 +37,24 @@ void loop() {
     }
     if(btVal == 'S')
     {
-      stoprobot();
+      stop();
     }
-    
-    
-    /*if(val == 1)
-    {
-      forward();
-    }
-    if(val == 2)
-    {
-      backward();
-    }*/
   }
 }
 
 void forward()
 {
-  digitalWrite(IN1, HIGH); // Turn HIGH motor A
+  digitalWrite(IN1, HIGH); 
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH); // Turn HIGH motor A
+  digitalWrite(IN3, HIGH); 
   digitalWrite(IN4, LOW);
   delay(100);
 }
 void backward()
 {
-  digitalWrite(IN1, LOW); // Turn HIGH motor A
+  digitalWrite(IN1, LOW); 
   digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW); // Turn HIGH motor A
+  digitalWrite(IN3, LOW); 
   digitalWrite(IN4, HIGH);
   delay(500);
 }
@@ -88,7 +77,7 @@ void right()
   delay(100);
 }
 
-void stoprobot()
+void stop()
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
