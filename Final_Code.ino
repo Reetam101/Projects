@@ -1,3 +1,7 @@
+/*Obstacle Avoiding Fire Fighting Bot*/
+/*Arduino UNO R3, L293N motor driver, 2 channel 5V Relay module, 9V pump, 300rpm geared motors, IR flame sensor, Ultrasonic HC-SR04, 
+9g Servo Motors*/
+
 #include <Servo.h>
 Servo myservo;
 Servo myservo2;
@@ -36,7 +40,6 @@ void loop()
 {
   flame_detected = digitalRead(flame_sensor);
   Serial.println(flame_detected);
-  //delay(1000);
   myservo.write(90);
   if (flame_detected == 0)
   {
@@ -78,39 +81,34 @@ void loop()
       }
     }
     Serial.println(distance);
-    //delay(200);
   }
-  //delay(1000);
 }
 
 void runmotor(){
-  digitalWrite(IN1, HIGH); // Turn HIGH motor A
+  digitalWrite(IN1, HIGH); 
   digitalWrite(IN2, LOW);
   analogWrite(ENA, 255);
-  digitalWrite(IN3, HIGH); // turn HIGH motor B
-  digitalWrite(IN4, LOW);  // To set the turning speed to 200 out of possible range 0 to 255
+  digitalWrite(IN3, HIGH); 
+  digitalWrite(IN4, LOW);  
   analogWrite(ENB, 255); 
   delay(100);
 }
 void stopmotor()
 {
-  digitalWrite(IN1, HIGH); // Turn HIGH motor A
+  digitalWrite(IN1, HIGH); 
   digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, HIGH); // turn HIGH motor B
-  digitalWrite(IN4, HIGH);  // To set the turning speed to 200 out of possible range 0 to 255 
+  digitalWrite(IN3, HIGH); 
+  digitalWrite(IN4, HIGH); 
   delay(500); 
 }
 
 int finddistance(){
     digitalWrite(trigPin, LOW);
     delayMicroseconds(5);
-    // Sets the trigPin on HIGH state for 10 micro seconds
     digitalWrite(trigPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(trigPin, LOW);
-    // Reads the echoPin, returns the sound wave travel time in microseconds
     duration = pulseIn(echoPin, HIGH);
-    // Calculating the distance
     distance= duration*0.034/2;
     return distance;
 }
@@ -123,7 +121,6 @@ int lookRight()
     myservo.write(90); 
     return d;
 }
-
 int lookLeft()
 {
     myservo.write(180); 
@@ -141,22 +138,23 @@ void moveright(){
     digitalWrite(IN4, LOW); 
     analogWrite(ENB, 255);
     delay(1000);
-  }
-  void moveleft(){
-    digitalWrite(IN1, HIGH); // Turn HIGH motor A
+}
+
+void moveleft(){
+    digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, 255);
-    digitalWrite(IN3, LOW); // turn HIGH motor B
-    digitalWrite(IN4, LOW);  // To set the turning speed to 200 out of possible range 0 to 255
+    digitalWrite(IN3, LOW); 
+    digitalWrite(IN4, LOW);
     delay(1000); 
-  }
+}
   void rotate()
   {
-    digitalWrite(IN1, HIGH); // Turn HIGH motor A
+    digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, 255);
-    digitalWrite(IN3, LOW); // turn HIGH motor B
-    digitalWrite(IN4, LOW);  // To set the turning speed to 200 out of possible range 0 to 255
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, LOW); 
     delay(2000); 
   }
   void spraywater()
